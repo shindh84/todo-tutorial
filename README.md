@@ -4,7 +4,14 @@
 
 ## 프로젝트 소개
 
-할 일을 추가하고 완료 여부를 토글할 수 있는 미니멀한 Todo 앱입니다. `d` 키로 다크 모드를 전환할 수 있으며, Server Components 중심으로 구성하고 클라이언트 상태는 최소화하는 방식으로 구현되어 있습니다.
+할 일을 추가·완료 토글·수정·삭제할 수 있는 Todo 앱입니다. Server Components 중심으로 구성하고 클라이언트 상태는 최소화하는 방식으로 구현되어 있으며, 다음 기능을 제공합니다.
+
+- 우선순위(높음/보통/낮음), 마감일, 카테고리(업무/개인/쇼핑) 지정
+- 제목 검색, 카테고리·완료 상태별 필터링
+- 생성일순 / 이름순 / 마감일순 정렬
+- 항목 더블 클릭으로 바로 수정
+- `d` 키로 다크 모드 전환
+- 브라우저 `localStorage`에 목록 자동 저장
 
 ## 관련 링크
 
@@ -16,15 +23,16 @@
 - Next.js 16 (App Router, Turbopack)
 - React 19
 - Tailwind CSS v4
-- shadcn/ui (radix-maia 스타일, taupe 베이스)
+- shadcn/ui (radix-mira 스타일, taupe 베이스, phosphor 아이콘)
 - TypeScript / ESLint / Prettier
-- 패키지 매니저: bun 1.3.6
+- Vitest / Testing Library
+- 패키지 매니저: bun
 
 ## 시작하기
 
 ### 요구 사항
 
-- bun 1.3.6 이상
+- bun (`packageManager`/lockfile 기준 최신 안정 버전)
 
 ### 설치 및 실행
 
@@ -47,12 +55,14 @@ bun run format     # Prettier 포맷팅
 bun run test       # Vitest 테스트 실행
 ```
 
-## 챕터별 시작 브랜치
+## 프로젝트 구조
 
-각 레슨은 시작 시점의 코드 상태를 브랜치로 제공합니다. 레슨 본문에서 안내하는 브랜치로 전환한 뒤 따라가시면 됩니다.
-
-```shell
-git checkout ch02-03
+```
+app/                    # App Router 엔트리 (page.tsx, layout.tsx, globals.css)
+components/             # Todo 관련 컴포넌트 + shadcn/ui 컴포넌트(components/ui)
+hooks/use-todos.ts      # Todo 상태 관리 및 localStorage 동기화
+lib/types.ts            # Todo, Priority, Category 등 도메인 타입
+lib/todo-utils.ts       # 정렬·검색 로직
 ```
 
 ## 컴포넌트 추가
